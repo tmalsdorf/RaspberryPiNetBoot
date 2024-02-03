@@ -81,6 +81,16 @@ The `addclient.sh` script sets up a Raspberry Pi as a netboot client. Configure 
 
 5. You can now boot your Raspberry Pi with the netboot setup.
 
+## Raspberry Pi Netboot Client Batch Setup (batch-addclients.sh)
+
+The `batch-addclients.sh` script allows you to create multiple netboot clients using a list of serial numbers. Customize the `batch-addclients.sh` script and run it as follows:
+
+```bash
+./batch-addclients.sh <serial_numbers_file>
+```
+
+Replace `<serial_numbers_file>` with the path to a file containing a list of serial numbers, one per line. The script will create netboot clients for each serial number.
+
 ## Note
 
 - These scripts are designed for use with Raspberry Pi netboot setups.
