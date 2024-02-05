@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# Configuration
-BASE_URL="https://downloads.raspberrypi.org/raspios_lite_arm64/images/"
-TMPIMG_DIR="tmpimg"
-CLIENTMASTERDIR="/data/clients"
-BOOTMASTERDIR="/data/tftp"
-OUTPUT_LINK="raspios-lite"
-GITHUB_URL="https://github.com/raspberrypi/rpi-firmware/raw/master"
-DEFAULT_USER="pi"
-DEFAULT_PASSWORD="raspberry"
+# Source environment variables
+source /path/to/env.sh || { echo "Could not load environment file"; exit 1; }
 
 # Check for required tools
 check_dependency() {

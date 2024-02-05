@@ -1,13 +1,7 @@
 #!/bin/bash
 
-# Configuration variables
-CLIENT_NFS_DIRECTORY="/data/clients/"
-TFTP_DIRECTORY="/data/tftp/"
-CLIENT_MASTER="raspios-lite/"
-TFTP_MASTER="bootmaster/"
-NFS_ROOT="192.168.1.20"
-OWNER="pi"
-SSH_PUBKEY_PATH="pubkey"  # Add the correct path to your SSH public key
+# Source environment variables
+source /path/to/env.sh || { echo "Could not load environment file"; exit 1; }
 
 # Function for error handling
 handle_error() {
