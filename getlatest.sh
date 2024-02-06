@@ -169,7 +169,7 @@ FOUND=0
 for file in "/boot/ssh" "/boot/ssh.txt"; do
   [ -e "$file" ] || continue
   FOUND=1
-  rm -f "$file"
+  #rm -f "$file"
 done
 
 if [ "$FOUND" = "1" ]; then
