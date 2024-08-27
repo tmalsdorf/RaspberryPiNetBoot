@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source environment variables
-source /path/to/env.sh || { echo "Could not load environment file"; exit 1; }
+source env.sh || { echo "Could not load environment file"; exit 1; }
 
 # Function for error handling
 handle_error() {

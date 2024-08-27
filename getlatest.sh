@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source environment variables
-source /path/to/env.sh || { echo "Could not load environment file"; exit 1; }
+source env.sh || { echo "Could not load environment file"; exit 1; }
 
 # Check for required tools
 check_dependency() {
@@ -151,6 +151,7 @@ create_ssh_file() {
 
     echo "Creating empty SSH file in $boot_path"
     touch "$ssh_file_path" || handle_error "Failed to create SSH file in $boot_path"
+    chmod 755 "$ssh_file_path"
 }
 
 # Function to add first-boot script
@@ -205,7 +206,7 @@ create_userconfig() {
 
     echo "Creating userconfig in $boot_path"
     echo "$username:$password" > "$userconfig_path" || handle_error "Failed to create userconf"
-    chmod 600 "$userconfig_path" || handle_error "Failed to set permissions for userconf"
+    chmod 755 "$userconfig_path" || handle_error "Failed to set permissions for userconf"
 
 }
 
@@ -298,8 +299,10 @@ copy_partition_contents "$boot_partition" "$BOOTMASTERDIR/$base_filename-boot"
 unmount_and_cleanup "$kpartx_output"
 
 create_ssh_file "$BOOTMASTERDIR/$base_filename-boot"
+create_ssh_file "$CLIENTMASTERDIR/$base_filename/boot"
 
-create_userconfig "$BOOTMASTERDIR/$base_filename-boot" "$DEFAULT_USER" "$DEFAULT_PASSWORD"
+create_userconfig "$CLIENTMASTERDIR/$base_filename/boot" "$DEFAULT_USER" "$DEFAULT_PASSWORD"
+create_userconfig "$BOOTMASTERDIR/$base_filename-boot"  "$DEFAULT_USER" "$DEFAULT_PASSWORD"
 
 ssh_startup_mod_script "$base_filename"
 
@@ -311,7 +314,7 @@ fi
 ln -s "$base_filename" "$OUTPUT_LINK"
 echo "Linked new base image as $OUTPUT_LINK"
 
-update_netboot_files "$BOOTMASTERDIR/$base_filename-boot"
+#update_netboot_files "$BOOTMASTERDIR/$base_filename-boot"
 
 ssh_startup_mod_script "$base_filename"
 
